@@ -18,9 +18,9 @@ from reward_cal import reward_cal,reward_cal_samp,reward_cal_bit
 
 
 def random_mem_update(k,sigma2,mem,order,r_mi_max,r_gmi_max,gsw,mi_mode):
-    s = np.array([1,3,5,7]) * np.abs(1 + 0.1 * np.random.randn(order))
-    sp = np.random.randn(4)
-    sp = -np.sort(-sp)
+    s = np.array([1,3,5,7]) * np.abs(1 + 0.05 * np.random.randn(order))
+    exploration_factor = sigma2 ** 0.85 * 0.4 * np.abs(1 + 0.05 * np.random.randn())
+    sp = - s ** 2 * exploration_factor
     # sp = np.exp(sp) / np.sum(np.exp(sp))
     
     amp_gain = np.arange(0.1,3.1,0.1)
