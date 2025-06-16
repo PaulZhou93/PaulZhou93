@@ -11,11 +11,11 @@ from reward_cal import reward_cal,reward_cal_samp,reward_cal_bit
 
 
 def random_mem_update(k,sigma2,mem,order,r_mi_max,r_gmi_max,gsw,mi_mode):
-    err_rate = 0.00
-    s = np.array([1,3,5,7]) * np.abs(1 + 0.1 * np.random.randn(order))
-    exploration_factor = 0.2 * np.random.rand()
-    sp = - s ** 2 * exploration_factor +  0.01 * np.random.randn(order)
-    sp = -np.sort(-sp)
+    err_rate = 0
+    s = np.array([1,3,5,7]) * np.abs(1 + 0.05 * np.random.randn(order))
+    exploration_factor = sigma2 ** 0.85 * 0.4 * np.abs(1 + 0.05 * np.random.randn())
+    exploration_factor = np.min((exploration_factor,1))
+    sp = - s ** 2 * exploration_factor
     # sp = np.exp(sp) / np.sum(np.exp(sp))
     if mi_mode == 0:
         r_mi = reward_cal(s,sp,sigma2)
